@@ -18,6 +18,13 @@ public class TheHistoryArray implements TheHistory {
     @Override
     public void removeWord(String wordToBeRemoved) {
         //TODO: check the TheHistory interface for more information
+        for (int i = 0; i < wordsArray.length; i++) {
+            if (wordsArray[i].equals(wordToBeRemoved)) {
+                String[] tempArray = Arrays.copyOf(wordsArray, wordsArray.length - 1);
+                System.arraycopy(wordsArray, i + 1, tempArray, i, wordsArray.length - 1 - i );
+                wordsArray = tempArray;
+            }
+        }
     }
 
     @Override
