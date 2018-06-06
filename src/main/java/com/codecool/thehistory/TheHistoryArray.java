@@ -54,10 +54,12 @@ public class TheHistoryArray implements TheHistory {
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
         //TODO: check the TheHistory interface for more information
+        boolean equalReplace = fromWords.length == toWords.length;
 
-        String[] temp = new String[wordsArray.length+100];
+        String[] temp = new String[wordsArray.length + 100];
         int origStartIndex = 0;
         int tempStartIndex = 0;
+
         for (int i=0; i < wordsArray.length; i++) {
             boolean expressionFound;
             if (wordsArray[i].equals(fromWords[0])) {
@@ -70,8 +72,9 @@ public class TheHistoryArray implements TheHistory {
                         expressionFound = false;
                     }
                 }
+
                 if (expressionFound) {
-                    if (fromWords.length == toWords.length) {
+                    if (equalReplace) {
                         System.arraycopy(toWords, 0, wordsArray, i, fromWords.length);
                     } else {
                         int fromLen = fromWords.length;
@@ -93,10 +96,12 @@ public class TheHistoryArray implements TheHistory {
                 }
             }
         }
-        if (origStartIndex < wordsArray.length) {
+
+        if (origStartIndex < wordsArray.length && !equalReplace) {
             System.arraycopy(wordsArray, origStartIndex, temp, tempStartIndex, wordsArray.length - origStartIndex);
         }
-        if (fromWords.length != toWords.length) {
+
+        if (!equalReplace) {
             int i = temp.length - 1;
             int nullCounter = 0;
             while (temp[i] == null) {
@@ -106,6 +111,7 @@ public class TheHistoryArray implements TheHistory {
                     break;
                 }
             }
+
             if (nullCounter != temp.length) {
                 String[] finalTemp = new String[temp.length - nullCounter];
                 System.arraycopy(temp, 0, finalTemp, 0, temp.length - nullCounter);
