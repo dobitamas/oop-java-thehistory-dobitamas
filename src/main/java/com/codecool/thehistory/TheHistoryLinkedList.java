@@ -21,7 +21,13 @@ public class TheHistoryLinkedList implements TheHistory {
     @Override
     public void removeWord(String wordToBeRemoved) {
         //TODO: check the TheHistory interface for more information
-        wordsLinkedList.removeIf(s -> s.equals(wordToBeRemoved));
+//        wordsLinkedList.removeIf(s -> s.equals(wordToBeRemoved));
+        ListIterator<String> li = wordsLinkedList.listIterator();
+        while (li.hasNext()) {
+            if (li.next().equals(wordToBeRemoved)) {
+                li.remove();
+            }
+        }
     }
 
     @Override
@@ -39,12 +45,8 @@ public class TheHistoryLinkedList implements TheHistory {
     @Override
     public void replaceOneWord(String from, String to) {
         //TODO: check the TheHistory interface for more information
-        ListIterator<String> li = wordsLinkedList.listIterator();
-        while (li.hasNext()) {
-            if (li.next().equals(from)) {
-                li.set(to);
-            }
-        }
+        //noinspection ResultOfMethodCallIgnored
+        Collections.replaceAll(wordsLinkedList, from, to);
     }
 
     @Override
