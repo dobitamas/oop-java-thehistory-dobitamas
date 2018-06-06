@@ -12,7 +12,7 @@ public class TheHistoryArray implements TheHistory {
     @Override
     public void add(String text) {
         //TODO: check the TheHistory interface for more information
-        wordsArray = text.split(" ");
+        wordsArray = text.split("\\s");
     }
 
     @Override

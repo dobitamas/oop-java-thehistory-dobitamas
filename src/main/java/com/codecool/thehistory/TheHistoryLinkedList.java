@@ -15,7 +15,7 @@ public class TheHistoryLinkedList implements TheHistory {
     @Override
     public void add(String text) {
         //TODO: check the TheHistory interface for more information
-        wordsLinkedList = new LinkedList<>(Arrays.asList(text.split("([\\s.,;:\"?!…(){}[\\\\]%#/]|(- )|( -))+")));
+        wordsLinkedList = new LinkedList<>(Arrays.asList(text.split("\\s")));
     }
 
     @Override

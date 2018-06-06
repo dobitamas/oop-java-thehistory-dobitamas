@@ -14,7 +14,7 @@ public class TheHistoryArrayList implements TheHistory {
     @Override
     public void add(String text) {
         //TODO: check the TheHistory interface for more information
-        wordsArrayList = new ArrayList<>(Arrays.asList(text.split("([\\s.,;:\"?!…(){}[\\\\]%#/]|(- )|( -))+")));
+        wordsArrayList = new ArrayList<>(Arrays.asList(text.split("\\s")));
     }
 
     @Override
