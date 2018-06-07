@@ -1,10 +1,6 @@
 package com.codecool.thehistory;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Arrays;
+import java.util.*;
 
 public class TheHistoryLinkedList implements TheHistory {
     /**
@@ -52,6 +48,59 @@ public class TheHistoryLinkedList implements TheHistory {
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
         //TODO: check the TheHistory interface for more information
+        if (!Arrays.equals(fromWords, toWords)) {
+            boolean equalReplace = fromWords.length == toWords.length;
+            List<String> temp = new ArrayList<>();
+            int fromLen = fromWords.length;
+            int toLen = toWords.length;
+
+            ListIterator<String> li = wordsLinkedList.listIterator();
+            while (li.hasNext()) {
+                boolean expressionFound;
+                String word = li.next();
+                if (word.equals(fromWords[0])) {
+                    expressionFound = true;
+                    int moveBack = 0;
+                    for (int i = 0; i < fromWords.length; i++) {
+                        if (!li.hasNext() && i < fromWords.length - 1 || !word.equals(fromWords[i])) {
+                            expressionFound = false;
+                            moveBack = i;
+                            break;
+                        }
+                        if (li.hasNext()) {
+                            word = li.next();
+                            moveBack++;
+                        }
+                    }
+                    for (int j = moveBack; j > 0; j--) {
+                        if (li.hasPrevious()) {
+                            li.previous();
+                        }
+                    }
+                    if (expressionFound) {
+                        if (li.hasPrevious()) {
+                            li.previous();
+                        } else {
+                            li.next();
+                        }
+                        if (equalReplace) {
+                            for (String toWord : toWords) {
+                                li.next();
+                                li.set(toWord);
+                            }
+                        } else {
+                            for (int j = 0; j < fromLen; j++) {
+                                li.next();
+                                li.remove();
+                            }
+                            for (String toword : toWords) {
+                                li.add(toword);
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Override
