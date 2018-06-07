@@ -117,6 +117,8 @@ public class TheHistoryArray implements TheHistory {
                 System.arraycopy(temp, 0, finalTemp, 0, temp.length - nullCounter);
                 wordsArray = finalTemp;
             }
+//            temp = Arrays.stream(temp).filter(x -> x != null).toArray(String[]::new);
+//            wordsArray = temp;
         }
     }
 
