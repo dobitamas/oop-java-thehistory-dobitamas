@@ -13,33 +13,56 @@ public class TheHistoryArrayList implements TheHistory {
 
     @Override
     public void add(String text) {
-        //TODO: check the TheHistory interface for more information
+        text = text.trim().replaceAll("\\s{2,}|\\n|\\t", " ");
+        wordsArrayList.add(text);
     }
 
     @Override
     public void removeWord(String wordToBeRemoved) {
-        //TODO: check the TheHistory interface for more information
+
+        wordsArrayList.remove(wordToBeRemoved);
     }
 
     @Override
     public int size() {
-        //TODO: check the TheHistory interface for more information
-        return 0;
+
+
+        return wordsArrayList.size();
     }
 
     @Override
     public void clear() {
-        //TODO: check the TheHistory interface for more information
+
+        wordsArrayList.clear();
     }
 
     @Override
     public void replaceOneWord(String from, String to) {
-        //TODO: check the TheHistory interface for more information
+        Collections.replaceAll(wordsArrayList, from, to);
     }
 
     @Override
     public void replaceMoreWords(String[] fromWords, String[] toWords) {
-        //TODO: check the TheHistory interface for more information
+        int fromWordLen = fromWords.length;
+        int toWordLen = toWords.length;
+        int maxLen = 0;
+        if (fromWordLen < toWordLen){
+            maxLen = fromWordLen;
+        } else if(fromWordLen > toWordLen){
+            maxLen = toWordLen;
+        } else {
+            maxLen = toWordLen;
+        }
+        for(int i = 0; i < wordsArrayList.size(); i++){
+            for(int j = 0; j < maxLen; j++){
+                if(wordsArrayList.get(i).equals(toWords[j])){
+                    wordsArrayList.set(i, toWords[j]);
+                }
+            }
+        }
+
+
+
     }
 
     @Override
